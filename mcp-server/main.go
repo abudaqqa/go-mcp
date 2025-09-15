@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"log"
-	"strings"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
@@ -13,19 +12,15 @@ type Input struct {
 }
 
 type Output struct {
-	Greeting string `json:"message" jsonschema:"the message to tell to the user"`
+	Message string `json:"message" jsonschema:"the message to tell to the user"`
 }
 
 func SayHi(ctx context.Context, req *mcp.CallToolRequest, input Input) (*mcp.CallToolResult, Output, error) {
-	return nil, Output{Greeting: "Hi " + input.Name}, nil
+	return nil, Output{Message: "Hi " + input.Name}, nil
 }
 
 func SayBye(ctx context.Context, req *mcp.CallToolRequest, input Input) (*mcp.CallToolResult, Output, error) {
-	name := strings.TrimSpace(input.Name)
-	if name == "" {
-		name = "there"
-	}
-	return nil, Output{Greeting: "Goodbye " + name}, nil
+	return nil, Output{Message: "Goodbye " + input.Name}, nil
 }
 
 func main() {
